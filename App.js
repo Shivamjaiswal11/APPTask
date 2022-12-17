@@ -5,10 +5,12 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import StackNavgation from './src/Navigation/StackNavigator/StackNavgation';
+import BottomNavigation from './src/Navigation/BottomNavigation';
 export default function App() {
   return (
   <NavigationContainer>
     <StackNavgation/>
+    {/* <BottomNavigation/> */}
   </NavigationContainer>
   );
 }

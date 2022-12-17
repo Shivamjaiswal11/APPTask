@@ -15,6 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import CustomButton from "./CustomButton";
 import NavigationString from "../constants/NavigationString";
 const PurchaseSuccessModel = ({ isVisible, onClose, title }) => {
+  const [tiket, settiket] = React.useState(Math.random());
   const navigation = useNavigation();
   function Closesheet(){
     navigation.navigate(NavigationString.Home)
@@ -56,7 +57,7 @@ const PurchaseSuccessModel = ({ isVisible, onClose, title }) => {
           <Text style={[styles.successfully,{  marginTop:10,}]}>Your your payment was made successfully!</Text>
           <View style={styles.separater}/>
           <Text style={styles.successfully}>Your booking ID</Text>
-          <Text style={[styles.successfully,{color:'#02D9E7',fontSize:30,fontWeight:'600'}]}>#33475490</Text>
+          <Text style={[styles.successfully,{color:'#02D9E7',fontSize:30,fontWeight:'600'}]}>#{tiket.toFixed(7).replace('0.','2')}</Text>
           <View style={styles.separater}/>
           <Text style={[styles.successfully,{fontSize:14}]}>You will need this booking ID to enter inside{'\n'}the event. You can view this code inside your{'\n'}profile / booked events</Text>
           <View style={{paddingHorizontal:21,width:'100%'}}>

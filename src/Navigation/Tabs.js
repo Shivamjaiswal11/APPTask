@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet,LogBox } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Current from "./BottomTabScreen/Current";
@@ -6,7 +6,8 @@ import Home from "./BottomTabScreen/Home";
 import Settings from "./BottomTabScreen/Settings";
 import User from "./BottomTabScreen/User";
 import Game from "./BottomTabScreen/Game";
-
+import StackNavgation from "./StackNavigator/StackNavgation";
+LogBox.ignoreAllLogs();
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,8 @@ export default function Tabs({ navigation }) {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarStyle: { backgroundColor:'#fff' ,height:70,borderTopLeftRadius:20,borderTopRightRadius:20},
+      
         // options
       }}
     >
@@ -58,7 +61,6 @@ export default function Tabs({ navigation }) {
           tabBarIcon: ({ focused }) => (
             <View
               style={{
-                // centring Tab Button...
                 alignItems: "center",
                 justifyContent: "center",
                 top: 5,
@@ -70,7 +72,6 @@ export default function Tabs({ navigation }) {
                     ? require("../../assets/shape.png")
                     : require("../../assets/shape.png")
                 }
-                // source={require('../../assets/addlistinIcong.png')}
                 resizeMode="contain"
                 style={{
                   width: 20,
@@ -87,12 +88,10 @@ export default function Tabs({ navigation }) {
       <Tab.Screen
         name="Game"
         component={Game}
-        // component={CustomTopTabs}
         options={{
             tabBarIcon: ({ focused }) => (
               <View
                 style={{
-                  // centring Tab Button...
                   alignItems: "center",
                   justifyContent: "center",
                   top: 5,
@@ -101,10 +100,9 @@ export default function Tabs({ navigation }) {
                 <Image
                   source={
                     focused
-                      ? require("../../assets/shape.png")
-                      : require("../../assets/shape.png")
+                      ? require("../../assets/game.png")
+                      : require("../../assets/game.png")
                   }
-                  // source={require('../../assets/addlistinIcong.png')}
                   resizeMode="contain"
                   style={{
                     width: 20,
@@ -121,12 +119,10 @@ export default function Tabs({ navigation }) {
       <Tab.Screen
         name="User"
         component={User}
-     
         options={{
           tabBarIcon: ({ focused }) => (
             <View
               style={{
-                // centring Tab Button...
                 alignItems: "center",
                 justifyContent: "center",
                 top: 5,
@@ -138,7 +134,6 @@ export default function Tabs({ navigation }) {
                     ? require("../../assets/shape.png")
                     : require("../../assets/shape.png")
                 }
-                // source={require('../../assets/ChatIcon.png')}
                 resizeMode="contain"
                 style={{
                   width: 20,
@@ -147,17 +142,6 @@ export default function Tabs({ navigation }) {
                   tintColor: focused ? "#465bd8" : "#707070",
                 }}
               />
-              {/* <ChatNewIcon/> */}
-              <Text
-                style={{
-                  color: focused ? "#465bd8" : "#707070",
-                  fontSize: 10,
-                  fontWeight: "700",
-                  textTransform: "uppercase",
-                }}
-              >
-                Inbox
-              </Text>
             </View>
           ),
         }}
@@ -165,13 +149,10 @@ export default function Tabs({ navigation }) {
       <Tab.Screen
         name="Settings"
         component={Settings}
-        //tabBarLabel: `Chat History`,
-
         options={{
           tabBarIcon: ({ focused }) => (
             <View
               style={{
-                // centring Tab Button...
                 alignItems: "center",
                 justifyContent: "center",
                 top: 5,
@@ -180,10 +161,9 @@ export default function Tabs({ navigation }) {
               <Image
                 source={
                   focused
-                    ?  require("../../assets/shape.png")
-                    :  require("../../assets/shape.png")
+                    ?  require("../../assets/setting.png")
+                    :  require("../../assets/setting.png")
                 }
-                // source={require('../../assets/PositionIcon.png')}
                 resizeMode="contain"
                 style={{
                   width: 20,
@@ -191,17 +171,6 @@ export default function Tabs({ navigation }) {
                   tintColor: focused ? "#465bd8" : "#707070",
                 }}
               />
-
-              <Text
-                style={{
-                  color: focused ? "#465bd8" : "#707070",
-                  fontSize: 10,
-                  fontWeight: "700",
-                  textTransform: "uppercase",
-                }}
-              >
-                Open Markets
-              </Text>
             </View>
           ),
         }}

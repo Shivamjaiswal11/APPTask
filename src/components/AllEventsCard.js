@@ -55,15 +55,11 @@ const AllEventsCard = ({ setLoading }) => {
   
     <FlatList
       style={{ backgroundColor: "#fff", width: "100%" }}
-      // horizontal
-      // horizontal={true}
       data={eventDetails}
-      // initialNumToRender={3}
       keyExtractor={(index) => index.toString()}
       renderItem={({ item, index }) => {
         return (
           <TouchableOpacity
-            // style={{ marginVertical: 10,width:340 }}
             activeOpacity={0.5}
             key={index}
             onPress={() => {
@@ -74,12 +70,10 @@ const AllEventsCard = ({ setLoading }) => {
           >
             <View
               style={styles.boxWithShadow}
-              // key={index
             >
               <Image
                 source={{
                   uri: `${item.mainImage}`,
-                  // uri: "https://media.geeksforgeeks.org/wp-content/uploads/20220217151648/download3.png",
                 }}
                 style={{
                   height: 185,
@@ -159,10 +153,6 @@ const AllEventsCard = ({ setLoading }) => {
                   <View
                     style={{
                       marginLeft:20
-                      // position: "absolute",
-                      // right: -75,
-                      // right:1,
-                      // overflow: "hidden",
                     }}
                   >
                     <View
@@ -171,10 +161,6 @@ const AllEventsCard = ({ setLoading }) => {
                         {
                           backgroundColor: "#02D9E7",
                           borderColor: "#02D9E7",
-                          // borderTopLeftRadius: 50,
-                          // borderBottomLeftRadius: 50,
-                          // borderBottomRightRadius: 0,
-                          // borderTopRightRadius: 0,
                         },
                       ]}
                     >

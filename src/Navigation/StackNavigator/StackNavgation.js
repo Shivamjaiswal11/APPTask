@@ -16,9 +16,7 @@ const StackNavgation = () => {
     
         <Stack.Navigator
           initialRouteName="SpleshScreen"
-          // screenOptions={{
-          //   headerShown: false,
-          // }}
+  
         >
           <Stack.Screen
             options={{ headerShown: false, headerSearchBarOptions: false }}
@@ -28,7 +26,7 @@ const StackNavgation = () => {
           <Stack.Screen
             options={{ headerShown: false, headerSearchBarOptions: false }}
             name="Home"
-            component={Home}
+            component={BottomNavigation}
           />
           <Stack.Screen
             options={{ headerShown: false, headerSearchBarOptions: false }}
@@ -59,21 +57,4 @@ const StackNavgation = () => {
             </Stack.Navigator>
   )
 }
-// const BottomStack = ({ navigation }) => {
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="HOME"
-//         component={BottomNavigation}
-//         // options={{ headerShown: false }}
-//         // options={{ header: () => <HomeHeader /> }}
-//       />
-//     </Stack.Navigator>
-//   );
-// };
-// export {
-//   StackNavgation,
-//   BottomStack,
-//   // WithTopTabStack
-// };
 export default StackNavgation
