@@ -7,6 +7,7 @@ import {
   FlatList,
   Animated,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -22,17 +23,18 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const RecommendedEventsCard = ({ setLoading }) => {
   const navigation = useNavigation();
+  const { width, height } = useWindowDimensions();
   const [indexSelected, setIndexSelected] = useState(0);
   const flatListRef = useRef();
-  const scrollX =useRef(new Animated.Value(0)).current;
-  const viewItemchange =useRef(({viewableitem})=>{
-    setIndexSelected(viewableitem[0].index)
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const viewItemchange = useRef(({ viewableitem }) => {
+    setIndexSelected(viewableitem[0].index);
   }).current;
-  
+
   // const viewConfig= useRef({  viewAreaCoveragePercentThreshold: 100,
   //   itemVisiblePercentThreshold: 80,minimumViewTime:100}).current;
   const [allevent, setAllevent] = useState([]);
-  
+
   useEffect(() => {
     GetAllEventDetalies();
   }, []);
@@ -66,30 +68,24 @@ const RecommendedEventsCard = ({ setLoading }) => {
   }
   return (
     <View>
-     
       <FlatList
-      
         ref={flatListRef}
-        style={{ backgroundColor: "#fff", height: 200, width: "100%" }}
+        style={{ backgroundColor: "#fff", height: 200, width: width }}
         horizontal
-        // onScroll={Animated.event([
-        //   { nativeEvent: { contentOffset: { x: scrollX } } },
-        //   { useNativeDriver: false },
-        // ])}
-        // horizontal={true}
+        onScroll={(e) => {
+          const x = e.nativeEvent.contentOffset.x;
+          setIndexSelected((x / width).toFixed(0));
+        }}
         data={allevent}
-        // initialNumToRender={3}
         keyExtractor={(index) => index.toString()}
-        scrollEventThrottle={32}
-      // viewabilityConfig={viewConfig}
-      // onViewableItemsChanged={viewItemchange}
-      // pagingEnabled
+        pagingEnabled
         renderItem={({ item, index }) => {
           return (
+            <View style={{width:width,height:height/2,alignItems:'center'}}>
             <TouchableOpacity
               activeOpacity={0.5}
               style={{ marginVertical: 10, width: 340 }}
-              key={index}
+              // key={index}
               // onPress={() => {
               //   navigation.navigate(NavigationString.EventDetailes);
               // }}
@@ -184,17 +180,34 @@ const RecommendedEventsCard = ({ setLoading }) => {
                 </View>
               </View>
             </TouchableOpacity>
+            </View>
           );
         }}
       />
-       <View
-        style={{ height: 20, flexDirection: "row", backgroundColor: "#fff" ,justifyContent:'center'}}
+      <View
+        style={{
+          height: 20,
+          flexDirection: "row",
+          backgroundColor: "#fff",
+          alignItems:'center',
+          justifyContent: "center",
+        }}
       >
         {allevent.map((item, index) => {
           return (
             <View
-              key={index.toString()}
-              style={[styles.styledote, { width: 10 }]}
+              // key={index.toString()}
+              style={{
+                height: indexSelected==index ?12:10,
+                borderRadius: indexSelected==index ?12:10,
+                marginHorizontal: 2,
+                alignItems:'center',
+                flexDirection:'row',
+                borderColor:"#ccc",
+                borderWidth:1,
+                width: indexSelected==index ?12:10,
+                backgroundColor: indexSelected==index ? "#cccc" : "#f2f3f5",
+              }}
             ></View>
           );
         })}
@@ -235,11 +248,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
   },
-  styledote: {
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal:2,
-    backgroundColor: "#ccc",
-    // width: 10,
-  },
+  // styledote: {
+  //   height: 10,
+  //   borderRadius: 5,
+  //   marginHorizontal: 2,
+  //   // backgroundColor: "#ccc",
+  //   // width: 10,
+  // },
 });
